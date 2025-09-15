@@ -1,0 +1,19 @@
+[Unit]
+Description=Redis Proxy Server
+After=network.target
+Requires=redis.service
+
+[Service]
+Type=simple
+User=serveradm
+Group=serveradm
+WorkingDirectory=/opt/redis-proxy
+ExecStart=/usr/bin/python3 -u /opt/redis-proxy/redis-proxy.py
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
